@@ -1,0 +1,22 @@
+targetSystem: "linux"
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  site:
+  kubelet:
+    tlsVerify: false
+  logLevel: warn
+  logs:
+    enabled: false
+    containerCollectAll: false
+    autoMultiLineDetection: false
+  # apm:
+  # confd:
+# clusteragent:
+# agents:
+  env:
+    - name: DD_CLOUD_PROVIDER_METADATA
+      value: "azure"
+providers:
+  aks:
+    enabled: true
+  
