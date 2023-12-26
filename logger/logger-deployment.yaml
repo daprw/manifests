@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logger-deployment
+  namespace: logger
+spec:
+  selector:
+    matchLabels:
+      app: logger
+  replicas: 5
+  template:
+    metadata:
+      name: logger-pod
+      labels:
+        app: logger
+    spec:
+      containers:
+        - name: logger
+          image: nginx
+          args: [/bin/bash, -c, 'while true; do echo $(date) INFO: Transaction submitted by user email $(openssl rand -hex 12)@$(shuf -n1 -e gmail.com yahoo.com hotmail.com outlook.com aol.com protonmail.com icloud.com example.co.uk sample.org pinterest.co.uk ipinfo.io); sleep 1; echo $(date) WARN: User2 has initiated protocol ORANGE; sleep 2; done']
+          resources:
+            requests:
+              cpu: 200m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi

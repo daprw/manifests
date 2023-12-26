@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: logger-pdb
+  namespace: logger
+spec:
+  maxUnavailable: 30%
+  selector:
+    matchLabels:
+      app: logger
